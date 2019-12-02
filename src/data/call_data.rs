@@ -20,6 +20,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+//usage statement
+use super::super::codegen::CodeGen;
+
 /// Contextual data for the `CALL` instruction
 pub struct CALLData {
     /// The address of the subroutine to call 
@@ -57,6 +60,18 @@ impl CALLData {
     }
 }
 
+//CodeGen implementation
+impl CodeGen for CALLData {
+    /// Generates the opcode for the data
+    /// 
+    /// # Returns
+    ///
+    /// The numeric opcode for the data
+    fn gen_opcode(&self) -> u16 {
+        return 0x2000 | self.addr;
+    }
+}
+
 //unit tests
 #[cfg(test)]
 mod tests {
@@ -70,6 +85,13 @@ mod tests {
     fn test_address_is_masked() {
         let data = CALLData::new(0xFFFF);
         assert_eq!(data.addr, 0x0FFF);
+    }
+
+    //this test checks proper opcode generation
+    #[test]
+    fn test_opcode_gen() {
+        let data = CALLData::new(0x0CCC);
+        assert_eq!(data.gen_opcode(), 0x2CCC);
     }
 }
 
