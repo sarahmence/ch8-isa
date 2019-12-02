@@ -23,5 +23,7 @@
 //exports
 mod jmp_data;
 pub use jmp_data::JMPData;
+mod call_data;
+pub use call_data::CALLData;
 
 //end of file
