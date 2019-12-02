@@ -27,5 +27,7 @@ mod call_data;
 pub use call_data::CALLData;
 mod skiptype;
 pub use skiptype::SKIPType;
+mod register;
+pub use register::Register;
 
 //end of file
