@@ -1,7 +1,7 @@
 /*
- * lib.rs
- * Main library file for ch8-isa
- * Created on 12/1/2019
+ * mod.rs
+ * Module export file for the codegen module
+ * Created on 12/2/2019
  * Created by Andrew Davis
  *
  * Copyright (C) 2019  Andrew Davis
@@ -20,8 +20,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//exports
-pub mod data;
-pub mod codegen;
 
-//end of file
