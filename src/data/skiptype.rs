@@ -21,6 +21,7 @@
  */
 
 /// Types of `SKIP` conditions
+#[derive(Debug, PartialEq)]
 pub enum SKIPType {
     /// Test equality between two registers
     /// or a register and a constant value

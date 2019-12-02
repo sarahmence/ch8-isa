@@ -21,7 +21,7 @@
  */
 
 /// The ID of a Chip-8 register
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum Register {
     //general purpose registers
     V0,
