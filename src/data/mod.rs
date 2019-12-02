@@ -20,4 +20,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//TODO: Export modules
+//exports
+mod jmp_data;
+pub use jmp_data::JMPData;
+
+//end of file
