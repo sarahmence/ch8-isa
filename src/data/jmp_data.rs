@@ -20,10 +20,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+//usage statement
+use super::super::codegen::CodeGen;
+
 /// Contextual data for the `JMP` instruction
 pub struct JMPData {
     /// The address to jump to
-    addr: u16
+    addr: u16,
+
+    /// Whether the jump is offset
+    is_offset: bool
 }
 
 //struct implementation
@@ -33,17 +39,19 @@ impl JMPData {
     /// # Argument
     ///
     /// * `new_addr` - The address to jump to
-    /// 
+    /// * `new_is_offset` - Whether the jump is offset 
+    ///
     /// # Returns
     ///
     /// A new `JMPData` instance with the given address
-    pub fn new(new_addr: u16) -> JMPData {
+    pub fn new(new_addr: u16, new_is_offset: bool) -> JMPData {
         //mask the new address
         let mask_addr = new_addr & 0x0FFF;
 
         //and return a new instance
         return JMPData {
-            addr: mask_addr
+            addr: mask_addr,
+            is_offset: new_is_offset 
         };
     }
 
@@ -54,6 +62,23 @@ impl JMPData {
     /// The address value of the data 
     pub fn get_addr(&self) -> u16 {
         return self.addr;
+    }
+}
+
+//CodeGen implementation
+impl CodeGen for JMPData {
+    /// Generates the opcode for the instruction
+    /// 
+    /// # Returns 
+    ///
+    /// The opcode for the `JMP` instruction
+    fn gen_opcode(&self) -> u16 {
+        //determine which JMP opcode to generate
+        if self.is_offset { //0xBNNN
+            return 0xB000 | self.addr;
+        } else { //0x1NNN
+            return 0x1000 | self.addr;
+        }
     }
 }
 
@@ -68,8 +93,19 @@ mod tests {
     //instance is created
     #[test]
     fn test_address_is_masked() {
-        let data = JMPData::new(0xFFFF);
+        let data = JMPData::new(0xFFFF, false);
         assert_eq!(data.addr, 0x0FFF);
+    }
+
+    //this test checks that proper opcodes
+    //are generated based on the offset flag
+    #[test]
+    fn test_opcode_gen() {
+        let offset = JMPData::new(0x0CCC, true);
+        let no_offset = JMPData::new(0x0CCC, false);
+        assert_eq!(offset.gen_opcode(), 0xBCCC);
+        assert_eq!(no_offset.gen_opcode(), 0x1CCC);
+
     }
 }
 
