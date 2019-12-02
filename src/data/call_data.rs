@@ -24,14 +24,14 @@
 use super::super::codegen::CodeGen;
 
 /// Contextual data for the `CALL` instruction
-pub struct CALLData {
+pub struct CallData {
     /// The address of the subroutine to call 
     addr: u16
 }
 
 //struct implementation
-impl CALLData {
-    /// Creates a new `CALLData` instance
+impl CallData {
+    /// Creates a new `CallData` instance
     ///
     /// # Argument
     ///
@@ -39,13 +39,13 @@ impl CALLData {
     /// 
     /// # Returns
     ///
-    /// A new `CALLData` instance with the given address
-    pub fn new(new_addr: u16) -> CALLData {
+    /// A new `CallData` instance with the given address
+    pub fn new(new_addr: u16) -> CallData {
         //mask the new address
         let mask_addr = new_addr & 0x0FFF;
 
         //and return a new instance
-        return CALLData {
+        return CallData {
             addr: mask_addr
         };
     }
@@ -61,7 +61,7 @@ impl CALLData {
 }
 
 //CodeGen implementation
-impl CodeGen for CALLData {
+impl CodeGen for CallData {
     /// Generates the opcode for the data
     /// 
     /// # Returns
@@ -75,7 +75,7 @@ impl CodeGen for CALLData {
 //unit tests
 #[cfg(test)]
 mod tests {
-    //import the CALLData struct
+    //import the CallData struct
     use super::*;
 
     //this test checks that address
@@ -83,14 +83,14 @@ mod tests {
     //instance is created
     #[test]
     fn test_address_is_masked() {
-        let data = CALLData::new(0xFFFF);
+        let data = CallData::new(0xFFFF);
         assert_eq!(data.addr, 0x0FFF);
     }
 
     //this test checks proper opcode generation
     #[test]
     fn test_opcode_gen() {
-        let data = CALLData::new(0x0CCC);
+        let data = CallData::new(0x0CCC);
         assert_eq!(data.gen_opcode(), 0x2CCC);
     }
 }

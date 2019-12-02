@@ -24,7 +24,7 @@
 use super::super::codegen::CodeGen;
 
 /// Contextual data for the `JMP` instruction
-pub struct JMPData {
+pub struct JmpData {
     /// The address to jump to
     addr: u16,
 
@@ -33,8 +33,8 @@ pub struct JMPData {
 }
 
 //struct implementation
-impl JMPData {
-    /// Creates a new `JMPData` instance
+impl JmpData {
+    /// Creates a new `JmpData` instance
     ///
     /// # Argument
     ///
@@ -43,13 +43,13 @@ impl JMPData {
     ///
     /// # Returns
     ///
-    /// A new `JMPData` instance with the given address
-    pub fn new(new_addr: u16, new_is_offset: bool) -> JMPData {
+    /// A new `JmpData` instance with the given address
+    pub fn new(new_addr: u16, new_is_offset: bool) -> JmpData {
         //mask the new address
         let mask_addr = new_addr & 0x0FFF;
 
         //and return a new instance
-        return JMPData {
+        return JmpData {
             addr: mask_addr,
             is_offset: new_is_offset 
         };
@@ -66,7 +66,7 @@ impl JMPData {
 }
 
 //CodeGen implementation
-impl CodeGen for JMPData {
+impl CodeGen for JmpData {
     /// Generates the opcode for the instruction
     /// 
     /// # Returns 
@@ -85,7 +85,7 @@ impl CodeGen for JMPData {
 //unit tests
 #[cfg(test)]
 mod tests {
-    //import the JMPData struct
+    //import the JmpData struct
     use super::*;
 
     //this test checks that address
@@ -93,7 +93,7 @@ mod tests {
     //instance is created
     #[test]
     fn test_address_is_masked() {
-        let data = JMPData::new(0xFFFF, false);
+        let data = JmpData::new(0xFFFF, false);
         assert_eq!(data.addr, 0x0FFF);
     }
 
@@ -101,8 +101,8 @@ mod tests {
     //are generated based on the offset flag
     #[test]
     fn test_opcode_gen() {
-        let offset = JMPData::new(0x0CCC, true);
-        let no_offset = JMPData::new(0x0CCC, false);
+        let offset = JmpData::new(0x0CCC, true);
+        let no_offset = JmpData::new(0x0CCC, false);
         assert_eq!(offset.gen_opcode(), 0xBCCC);
         assert_eq!(no_offset.gen_opcode(), 0x1CCC);
 

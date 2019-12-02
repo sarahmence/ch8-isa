@@ -22,11 +22,11 @@
 
 //usage statements
 use super::Register;
-use super::SKIPType;
+use super::SkipType;
 use super::super::codegen::CodeGen;
 
 /// Contextual data for the `SKIP` instruction
-pub struct SKIPData {
+pub struct SkipData {
     /// The LHS side of the comparison
     vx: Register,
 
@@ -37,12 +37,12 @@ pub struct SKIPData {
     nn: Option<u8>,
 
     /// The skip type of the instruction
-    skip_type: SKIPType 
+    skip_type: SkipType 
 }
 
 //implementation
-impl SKIPData {
-    /// Constructs a new `SKIPData` instance with a 
+impl SkipData {
+    /// Constructs a new `SkipData` instance with a 
     /// register-to-register comparison
     ///
     /// # Arguments
@@ -53,17 +53,17 @@ impl SKIPData {
     ///
     /// # Returns
     ///
-    /// A new `SKIPData` instance with the given properties
+    /// A new `SkipData` instance with the given properties
     ///
     /// # Panics
     ///
     /// This method will panic if `new_type` is a key-related variant
     /// or if either register is the `I` register 
     pub fn with_register(new_vx: Register, new_vy: Register,
-                         new_type: SKIPType) -> SKIPData {
+                         new_type: SkipType) -> SkipData {
         //verify the type
-        if (new_type == SKIPType::KeyUp) || 
-            (new_type == SKIPType::KeyDown) {
+        if (new_type == SkipType::KeyUp) || 
+            (new_type == SkipType::KeyDown) {
             panic!("Bad skip type: {:?}", new_type);
         }
 
@@ -73,10 +73,10 @@ impl SKIPData {
         }
 
         //and return a new instance
-        return SKIPData::new(new_vx, Some(new_vy), None, new_type);
+        return SkipData::new(new_vx, Some(new_vy), None, new_type);
     }
 
-    /// Constructs a new `SKIPData` instance with a 
+    /// Constructs a new `SkipData` instance with a 
     /// register-to-constant comparison
     ///
     /// # Arguments
@@ -87,17 +87,17 @@ impl SKIPData {
     ///
     /// # Returns
     ///
-    /// A new `SKIPData` instance with the given properties
+    /// A new `SkipData` instance with the given properties
     ///
     /// # Panics
     ///
     /// This method will panic if `new_type` is a key-related variant
     /// or if `new_vx` is the `I` register 
     pub fn with_constant(new_vx: Register, new_nn: u8,
-                         new_type: SKIPType) -> SKIPData {
+                         new_type: SkipType) -> SkipData {
         //verify the type
-        if (new_type == SKIPType::KeyUp) || 
-            (new_type == SKIPType::KeyDown) {
+        if (new_type == SkipType::KeyUp) || 
+            (new_type == SkipType::KeyDown) {
             panic!("Bad skip type: {:?}", new_type);
         }
 
@@ -107,10 +107,10 @@ impl SKIPData {
         }
 
         //and return a new instance
-        return SKIPData::new(new_vx, None, Some(new_nn), new_type);
+        return SkipData::new(new_vx, None, Some(new_nn), new_type);
     }
 
-    /// Constructs a new `SKIPData` instance with a 
+    /// Constructs a new `SkipData` instance with a 
     /// key comparison
     ///
     /// # Arguments
@@ -120,17 +120,17 @@ impl SKIPData {
     ///
     /// # Returns
     ///
-    /// A new `SKIPData` instance with the given properties
+    /// A new `SkipData` instance with the given properties
     ///
     /// # Panics
     ///
     /// This method will panic if `new_type` is not a key-related variant
     /// or if `new_vx` is the `I` register 
     pub fn with_key(new_vx: Register, 
-                         new_type: SKIPType) -> SKIPData {
+                         new_type: SkipType) -> SkipData {
         //verify the type
-        if (new_type != SKIPType::KeyUp) && 
-            (new_type != SKIPType::KeyDown) {
+        if (new_type != SkipType::KeyUp) && 
+            (new_type != SkipType::KeyDown) {
             panic!("Bad skip type: {:?}", new_type);
         }
 
@@ -140,11 +140,11 @@ impl SKIPData {
         }
 
         //and return a new instance
-        return SKIPData::new(new_vx, None, None, new_type);
+        return SkipData::new(new_vx, None, None, new_type);
     }
 
 
-    /// Constructs a new `SKIPData` instance
+    /// Constructs a new `SkipData` instance
     ///
     /// # Arguments
     ///
@@ -155,10 +155,10 @@ impl SKIPData {
     /// 
     /// # Returns 
     ///
-    /// A new `SKIPData` instance with the given properties
+    /// A new `SkipData` instance with the given properties
     fn new(new_vx: Register, new_vy: Option<Register>, 
-            new_nn: Option<u8>, new_type: SKIPType) -> SKIPData {
-        return SKIPData {
+            new_nn: Option<u8>, new_type: SkipType) -> SkipData {
+        return SkipData {
             vx: new_vx,
             vy: new_vy,
             nn: new_nn,
@@ -168,7 +168,7 @@ impl SKIPData {
 }
 
 //CodeGen implementation
-impl CodeGen for SKIPData {
+impl CodeGen for SkipData {
     /// Generates the opcode for the data
     /// 
     /// # Returns
@@ -177,7 +177,7 @@ impl CodeGen for SKIPData {
     fn gen_opcode(&self) -> u16 {
         //match the skip type
         match self.skip_type {
-            SKIPType::Equals => {
+            SkipType::Equals => {
                 //match whether the register field is not None
                 match self.vy.clone() {
                     Some(y) => { //register comparison
@@ -201,7 +201,7 @@ impl CodeGen for SKIPData {
                     }
                 }
             },
-            SKIPType::NotEquals => {
+            SkipType::NotEquals => {
                 //match whether the register field is not None
                 match self.vy.clone() {
                     Some(y) => { //register comparison
@@ -225,12 +225,12 @@ impl CodeGen for SKIPData {
                     }
                 }
             },
-            SKIPType::KeyDown => {
+            SkipType::KeyDown => {
                 let mut code = 0xE09E;
                 code |= (self.vx.to_id() as u16) << 8;
                 return code;
             },
-            SKIPType::KeyUp => {
+            SkipType::KeyUp => {
                 let mut code = 0xE0A1;
                 code |= (self.vx.to_id() as u16) << 8;
                 return code;
@@ -242,56 +242,56 @@ impl CodeGen for SKIPData {
 //unit tests
 #[cfg(test)]
 mod tests {
-    //import the SKIPData struct
+    //import the SkipData struct
     use super::*;
 
     //this test checks that bad skip types panic
     #[test]
     #[should_panic]
     fn test_bad_skiptype_panic() {
-        let _b1 = SKIPData::with_register(Register::V0, Register::V1,
-                                         SKIPType::KeyDown);
-        let _b2 = SKIPData::with_register(Register::V0, Register::V1,
-                                         SKIPType::KeyUp);
-        let _b3 = SKIPData::with_constant(Register::V0, 0xFF,
-                                         SKIPType::KeyDown);
-        let _b4 = SKIPData::with_constant(Register::V0, 0xFF,
-                                         SKIPType::KeyUp);
-        let _b5 = SKIPData::with_key(Register::V0, SKIPType::Equals);
-        let _b6 = SKIPData::with_key(Register::V0, SKIPType::NotEquals);
+        let _b1 = SkipData::with_register(Register::V0, Register::V1,
+                                         SkipType::KeyDown);
+        let _b2 = SkipData::with_register(Register::V0, Register::V1,
+                                         SkipType::KeyUp);
+        let _b3 = SkipData::with_constant(Register::V0, 0xFF,
+                                         SkipType::KeyDown);
+        let _b4 = SkipData::with_constant(Register::V0, 0xFF,
+                                         SkipType::KeyUp);
+        let _b5 = SkipData::with_key(Register::V0, SkipType::Equals);
+        let _b6 = SkipData::with_key(Register::V0, SkipType::NotEquals);
     }
 
     //this test checks that using the index register panics
     #[test]
     #[should_panic]
     fn test_index_register_panic() {
-        let _b1 = SKIPData::with_register(Register::I, Register::V0,
-                                          SKIPType::Equals);
-        let _b2 = SKIPData::with_register(Register::V0, Register::I,
-                                          SKIPType::Equals);
-        let _b3 = SKIPData::with_constant(Register::I, 0xFF,
-                                          SKIPType::Equals);
-        let _b4 = SKIPData::with_key(Register::I, SKIPType::KeyDown);
+        let _b1 = SkipData::with_register(Register::I, Register::V0,
+                                          SkipType::Equals);
+        let _b2 = SkipData::with_register(Register::V0, Register::I,
+                                          SkipType::Equals);
+        let _b3 = SkipData::with_constant(Register::I, 0xFF,
+                                          SkipType::Equals);
+        let _b4 = SkipData::with_key(Register::I, SkipType::KeyDown);
     }
 
     //this test checks code generation
     #[test]
     fn test_opcode_gen() {
-        let sk1 = SKIPData::with_constant(Register::V1, 0xFF,
-                                          SKIPType::Equals);
+        let sk1 = SkipData::with_constant(Register::V1, 0xFF,
+                                          SkipType::Equals);
         assert_eq!(sk1.gen_opcode(), 0x31FF);
-        let sk2 = SKIPData::with_constant(Register::V1, 0xFF,
-                                          SKIPType::NotEquals);
+        let sk2 = SkipData::with_constant(Register::V1, 0xFF,
+                                          SkipType::NotEquals);
         assert_eq!(sk2.gen_opcode(), 0x41FF);
-        let sk3 = SKIPData::with_register(Register::V1, Register::V2,
-                                          SKIPType::Equals);
+        let sk3 = SkipData::with_register(Register::V1, Register::V2,
+                                          SkipType::Equals);
         assert_eq!(sk3.gen_opcode(), 0x5120);
-        let sk4 = SKIPData::with_register(Register::V1, Register::V2,
-                                          SKIPType::NotEquals);
+        let sk4 = SkipData::with_register(Register::V1, Register::V2,
+                                          SkipType::NotEquals);
         assert_eq!(sk4.gen_opcode(), 0x9120);
-        let sk5 = SKIPData::with_key(Register::V1, SKIPType::KeyDown);
+        let sk5 = SkipData::with_key(Register::V1, SkipType::KeyDown);
         assert_eq!(sk5.gen_opcode(), 0xE19E);
-        let sk6 = SKIPData::with_key(Register::V1, SKIPType::KeyUp);
+        let sk6 = SkipData::with_key(Register::V1, SkipType::KeyUp);
         assert_eq!(sk6.gen_opcode(), 0xE1A1);
     }
 }

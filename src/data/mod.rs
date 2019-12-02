@@ -22,18 +22,18 @@
 
 //exports
 mod jmp_data;
-pub use jmp_data::JMPData;
+pub use jmp_data::JmpData;
 mod call_data;
-pub use call_data::CALLData;
+pub use call_data::CallData;
 mod skiptype;
-pub use skiptype::SKIPType;
+pub use skiptype::SkipType;
 mod register;
 pub use register::Register;
 mod cls_data;
-pub use cls_data::CLSData;
+pub use cls_data::ClsData;
 mod ret_data;
-pub use ret_data::RETData;
+pub use ret_data::RetData;
 mod skip_data;
-pub use skip_data::SKIPData;
+pub use skip_data::SkipData;
 
 //end of file

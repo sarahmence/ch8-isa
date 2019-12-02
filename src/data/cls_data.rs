@@ -24,24 +24,24 @@
 use super::super::codegen::CodeGen;
 
 /// Contextual data for the `CLS` instruction
-pub struct CLSData {
+pub struct ClsData {
     //no fields
 }
 
 //implementation
-impl CLSData {
-    /// Creates a new `CLSData` instance
+impl ClsData {
+    /// Creates a new `ClsData` instance
     ///
     /// # Returns
     ///
-    /// A new `CLSData` instance
-    pub fn new() -> CLSData {
-        return CLSData { };
+    /// A new `ClsData` instance
+    pub fn new() -> ClsData {
+        return ClsData { };
     }
 }
 
 //CodeGen implementation
-impl CodeGen for CLSData {
+impl CodeGen for ClsData {
     /// Generates the opcode for the instruction
     /// 
     /// # Returns 

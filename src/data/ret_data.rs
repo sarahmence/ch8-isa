@@ -24,24 +24,24 @@
 use super::super::codegen::CodeGen;
 
 /// Contextual data for the `RET` instruction
-pub struct RETData {
+pub struct RetData {
     //no fields
 }
 
 //implementation
-impl RETData {
-    /// Creates a new `RETData` instance
+impl RetData {
+    /// Creates a new `RetData` instance
     ///
     /// # Returns
     ///
-    /// A new `RETData` instance
-    pub fn new() -> RETData {
-        return RETData { };
+    /// A new `RetData` instance
+    pub fn new() -> RetData {
+        return RetData { };
     }
 }
 
 //CodeGen implementation
-impl CodeGen for RETData {
+impl CodeGen for RetData {
     /// Generates the opcode for the instruction
     /// 
     /// # Returns 
