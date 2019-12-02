@@ -29,5 +29,7 @@ mod skiptype;
 pub use skiptype::SKIPType;
 mod register;
 pub use register::Register;
+mod cls_data;
+pub use cls_data::CLSData;
 
 //end of file
