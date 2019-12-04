@@ -37,5 +37,7 @@ mod skip_data;
 pub use skip_data::SkipData;
 mod mov_data;
 pub use mov_data::MovData;
+mod add_data;
+pub use add_data::AddData;
 
 //end of file
