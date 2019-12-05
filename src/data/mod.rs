@@ -45,5 +45,7 @@ mod and_data;
 pub use and_data::AndData;
 mod xor_data;
 pub use xor_data::XorData;
+mod sub_data;
+pub use sub_data::SubData;
 
 //end of file
