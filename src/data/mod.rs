@@ -43,5 +43,7 @@ mod or_data;
 pub use or_data::OrData;
 mod and_data;
 pub use and_data::AndData;
+mod xor_data;
+pub use xor_data::XorData;
 
 //end of file
