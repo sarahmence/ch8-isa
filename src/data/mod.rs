@@ -67,5 +67,7 @@ mod sch_data;
 pub use sch_data::SchData;
 mod bcd_data;
 pub use bcd_data::BcdData;
+mod rdp_data;
+pub use rdp_data::RdpData;
 
 //end of file
