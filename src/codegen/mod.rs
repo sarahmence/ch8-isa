@@ -25,5 +25,7 @@ mod codegen;
 pub use codegen::CodeGen;
 mod instruction;
 pub use instruction::Instruction;
+mod binary;
+pub use binary::Binary;
 
 //end of file
