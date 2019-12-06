@@ -55,5 +55,7 @@ mod rand_data;
 pub use rand_data::RandData;
 mod draw_data;
 pub use draw_data::DrawData;
+mod gdl_data;
+pub use gdl_data::GdlData;
 
 //end of file
