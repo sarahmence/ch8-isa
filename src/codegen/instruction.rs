@@ -208,4 +208,27 @@ impl CodeGen for Instruction {
     }
 }
 
+//unit tests
+#[cfg(test)]
+mod tests {
+    //import the Instruction enum
+    use super::*;
+
+    //this test checks generation 
+    //of the CLS opcode
+    #[test]
+    fn test_cls_opcode_gen() {
+        let instr = Instruction::CLS;
+        assert_eq!(instr.gen_opcode(), 0x00E0);
+    }
+
+    //this test checks generation
+    //of the RET opcode
+    #[test]
+    fn test_ret_opcode_gen() {
+        let instr = Instruction::RET;
+        assert_eq!(instr.gen_opcode(), 0x00EE);
+    }
+}
+
 //end of file
