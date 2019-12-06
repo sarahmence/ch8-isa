@@ -22,7 +22,7 @@
 
 //exports
 mod codegen;
-pub use codegen::CodeGen;
+pub(crate) use codegen::CodeGen;
 mod instruction;
 pub use instruction::Instruction;
 mod binary;
