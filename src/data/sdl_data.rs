@@ -48,7 +48,7 @@ impl SdlData {
     pub fn new(new_vx: Register) -> SdlData {
         //validate the register
         if new_vx == Register::I {
-            panic!("Cannot read delay timer into index register");
+            panic!("Cannot read delay timer from index register");
         }
 
         //and return the instance
