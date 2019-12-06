@@ -55,5 +55,7 @@ mod shr_data;
 pub use shr_data::ShrData;
 mod shl_data;
 pub use shl_data::ShlData;
+mod rand_data;
+pub use rand_data::RandData;
 
 //end of file
