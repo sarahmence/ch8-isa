@@ -69,5 +69,7 @@ mod bcd_data;
 pub use bcd_data::BcdData;
 mod rdp_data;
 pub use rdp_data::RdpData;
+mod rld_data;
+pub use rld_data::RldData;
 
 //end of file
