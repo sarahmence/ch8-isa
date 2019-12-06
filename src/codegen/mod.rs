@@ -23,5 +23,7 @@
 //exports
 mod codegen;
 pub use codegen::CodeGen;
+mod instruction;
+pub use instruction::Instruction;
 
 //end of file
