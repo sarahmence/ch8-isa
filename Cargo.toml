@@ -5,6 +5,7 @@ authors = ["ahdavis <ahdavis13@gmail.com>"]
 edition = "2018"
 license = "LGPL-3.0+"
 readme = "README.md"
+description = "Chip-8 instruction set and code generator"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
