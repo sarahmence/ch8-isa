@@ -53,5 +53,7 @@ mod subn_data;
 pub use subn_data::SubnData;
 mod shr_data;
 pub use shr_data::ShrData;
+mod shl_data;
+pub use shl_data::ShlData;
 
 //end of file
