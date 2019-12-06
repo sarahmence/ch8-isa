@@ -21,7 +21,7 @@ This crate works with Cargo and is on [crates.io](https://crates.io/crates/ch8-i
 
 ```
 [dependencies]
-ch8-isa = "0.1.0"
+ch8-isa = "0.1.1"
 ```
 
 After adding this crate to your `Cargo.toml`, import it like any other
@@ -32,3 +32,4 @@ crate and you're on your way to creating a Chip-8 ROM!
 Feedback and suggestions are always appreciated, so if you have an idea
 for this crate, just open a pull request or issue on Github. Thanks for
 using `ch8-isa`, and happy programming!
+
