@@ -17,8 +17,7 @@ The documentation may be found on [docs.rs](https://docs.rs/ch8-isa).
 
 # Installation
 
-This crate works with Cargo and is on [crates.io](https://crates.io/crates/c
-h8-isa). Add it to your `Cargo.toml` like so:
+This crate works with Cargo and is on [crates.io](https://crates.io/crates/ch8-isa). Add it to your `Cargo.toml` like so:
 
 ```
 [dependencies]
