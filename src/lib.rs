@@ -23,5 +23,6 @@
 //exports
 pub mod data;
 pub mod codegen;
+pub mod error;
 
 //end of file
