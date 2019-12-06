@@ -23,6 +23,8 @@
 //exports
 mod jmp_data;
 pub use jmp_data::JmpData;
+mod jpc_data;
+pub use jpc_data::JpcData;
 mod call_data;
 pub use call_data::CallData;
 mod skiptype;
