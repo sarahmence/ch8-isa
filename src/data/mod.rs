@@ -63,5 +63,7 @@ mod sdl_data;
 pub use sdl_data::SdlData;
 mod snd_data;
 pub use snd_data::SndData;
+mod sch_data;
+pub use sch_data::SchData;
 
 //end of file
