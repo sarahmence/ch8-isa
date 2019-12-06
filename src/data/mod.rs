@@ -57,5 +57,7 @@ mod draw_data;
 pub use draw_data::DrawData;
 mod gdl_data;
 pub use gdl_data::GdlData;
+mod key_data;
+pub use key_data::KeyData;
 
 //end of file
