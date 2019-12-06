@@ -61,5 +61,7 @@ mod key_data;
 pub use key_data::KeyData;
 mod sdl_data;
 pub use sdl_data::SdlData;
+mod snd_data;
+pub use snd_data::SndData;
 
 //end of file
