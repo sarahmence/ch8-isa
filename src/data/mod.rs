@@ -59,5 +59,7 @@ mod gdl_data;
 pub use gdl_data::GdlData;
 mod key_data;
 pub use key_data::KeyData;
+mod sdl_data;
+pub use sdl_data::SdlData;
 
 //end of file
