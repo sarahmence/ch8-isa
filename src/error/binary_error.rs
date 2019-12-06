@@ -58,7 +58,7 @@ impl BinaryError {
     ///
     /// The error type
     pub fn get_type(&self) -> BinaryErrorType {
-        return self.error_type;
+        return self.error_type.clone();
     }
 
     /// Gets the binary name 

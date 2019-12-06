@@ -23,6 +23,7 @@
 //no usage statements
 
 /// Types of binary creation errors
+#[derive(Debug, Clone)]
 pub enum BinaryErrorType {
     /// The desired filename exists already
     FileExists,
