@@ -20,7 +20,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//usage statement
+//usage statements
+use std::fmt;
 use super::BinaryErrorType;
 
 /// A possible error resulting from attempted binary creation
@@ -68,6 +69,22 @@ impl BinaryError {
     /// The name of the binary that produced an error
     pub fn get_binary_name(&self) -> &str {
         return self.binary_name.as_str();
+    }
+}
+
+//Display implementation
+impl fmt::Display for BinaryError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "An error occurred creating the Chip-8 binary: {}",
+               self.error_type)
+    }
+}
+
+//Debug implementation
+impl fmt::Debug for BinaryError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{{ file: {}, line: {}, error: {} }}", 
+               file!(), line!(), self.error_type)
     }
 }
 

@@ -20,10 +20,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//no usage statements
+//usage statement
+use std::fmt;
 
 /// Types of binary creation errors
-#[derive(Debug, Clone)]
+#[derive(Clone)]
 pub enum BinaryErrorType {
     /// The desired filename exists already
     FileExists,
@@ -34,5 +35,40 @@ pub enum BinaryErrorType {
     /// Error writing the binary to a file
     FileError
 }
+
+//Debug implementation
+impl fmt::Debug for BinaryErrorType {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match *self {
+            BinaryErrorType::DataError => {
+                write!(f, "Error writing data into binary")
+            },
+            BinaryErrorType::FileError => {
+                write!(f, "Error writing binary to disk")
+            },
+            BinaryErrorType::FileExists => {
+                write!(f, "A binary already exists with the given name")
+            }
+        }
+    }
+}
+
+//Display implementation
+impl fmt::Display for BinaryErrorType {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match *self {
+            BinaryErrorType::DataError => {
+                write!(f, "Error writing data into binary")
+            },
+            BinaryErrorType::FileError => {
+                write!(f, "Error writing binary to disk")
+            },
+            BinaryErrorType::FileExists => {
+                write!(f, "A binary already exists with the given name")
+            }
+        }
+    }
+}
+
 
 //end of file
