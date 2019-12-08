@@ -1,6 +1,6 @@
 /*
  * test_binary_creation.rs
- * Defines a struct that holds data for the RAND instruction
+ * Defines integration tests for generating Chip-8 binaries
  * Created on 12/6/2019
  * Created by Andrew Davis
  *
@@ -61,7 +61,7 @@ fn test_binary_creation() {
     //open the rom file
     let mut file = fs::File::open("test_tmp.c8").unwrap();
 
-    //read the 4 words and validate them
+    //read the 5 words and validate them
     let mut word = file.read_u16::<BigEndian>().unwrap();
     assert_eq!(word, 0x00E0);
     word = file.read_u16::<BigEndian>().unwrap();
